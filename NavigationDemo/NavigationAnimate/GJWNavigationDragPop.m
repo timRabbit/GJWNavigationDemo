@@ -8,6 +8,7 @@
 
 #import "GJWNavigationDragPop.h"
 #import "GJWNavigationPopAnimate.h"
+#import "GJWNavigationColorSource.h"
 
 @interface GJWNavigationDragPop ()
 
@@ -39,6 +40,23 @@
     if (NO == self.enablePanBack) {
         return;
     }
+    
+    //不支持返回的 code
+    UIViewController *topVC = self.navigationController.topViewController;
+    BOOL conformsToProtocol = [topVC conformsToProtocol:@protocol(GJWNavigationViewControllerPanProtocol)];
+    BOOL respondsToSelector =  [topVC respondsToSelector:@selector(enablePanBack)];
+
+    if ( conformsToProtocol && respondsToSelector ) {
+        
+        NSObject<GJWNavigationViewControllerPanProtocol > *objectProtocol = (id<GJWNavigationViewControllerPanProtocol>)topVC;
+        
+        if (NO == [objectProtocol enablePanBack]) {
+            return;
+        }
+        
+    }
+    
+    
     
     CGPoint offset = [pan translationInView:pan.view];
     // 速度

@@ -31,5 +31,8 @@
 //    return [UIColor colorWithRed:0.972 green:0.394 blue:0.294 alpha:1.000];
     return [UIColor colorWithRed:0.018 green:0.028 blue:0.023 alpha:0.777];
 }
-
+-(BOOL)enablePanBack
+{
+    return NO;
+}
 @end

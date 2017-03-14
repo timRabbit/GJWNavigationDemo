@@ -8,6 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface SecondViewController : BaseViewController
+@interface SecondViewController : BaseViewController <GJWNavigationViewControllerPanProtocol>
 
 @end

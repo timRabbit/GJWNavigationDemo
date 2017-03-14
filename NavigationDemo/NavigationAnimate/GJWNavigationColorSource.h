@@ -16,3 +16,11 @@
 - (UIColor *)navigationBarOutColor;
 
 @end
+
+@protocol GJWNavigationViewControllerPanProtocol <NSObject>
+
+//@optional
+
+- (BOOL)enablePanBack;
+
+@end
