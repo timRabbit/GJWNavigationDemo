@@ -16,4 +16,6 @@
 /** 设置滑动返回的幅度（0~1）默认0.3 */ 
 @property (nonatomic, assign) float progressFinished;
 
+-(void)addDisAblePanBackViewController:(Class)class;
+
 @end

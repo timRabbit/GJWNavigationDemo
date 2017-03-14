@@ -24,17 +24,21 @@
 - (void)setNavigationController:(UINavigationController *)navigationController {
     _navigationController = navigationController;
     
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    [_navigationController.view addGestureRecognizer:pan];
+//    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+//    [_navigationController.view addGestureRecognizer:pan];
     
 //    // 类似于系统从左侧滑动返回
-//    UIScreenEdgePanGestureRecognizer *edgePan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-//    edgePan.edges = UIRectEdgeLeft;
-//    [_navigationController.view addGestureRecognizer:edgePan];
+    UIScreenEdgePanGestureRecognizer *edgePan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    edgePan.edges = UIRectEdgeLeft;
+    [_navigationController.view addGestureRecognizer:edgePan];
+    
 }
 
 
 - (void)handlePan:(UIPanGestureRecognizer *)pan {
+    if (NO == self.enablePanBack) {
+        return;
+    }
     
     CGPoint offset = [pan translationInView:pan.view];
     // 速度

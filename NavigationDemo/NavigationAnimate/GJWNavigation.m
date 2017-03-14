@@ -16,6 +16,9 @@
 @property (nonatomic, strong) GJWNavigationPushAnimate *push;
 @property (nonatomic, strong) GJWNavigationPopAnimate *pop;
 @property (nonatomic, strong) GJWNavigationDragPop *dragPop;
+
+@property (nonatomic, strong) NSMutableSet *disableVC_set;
+
 @end
 
 @implementation GJWNavigation
@@ -45,6 +48,14 @@
     }
     return self;
 }
+-(NSMutableSet *)disableVC_set
+{
+    if (!_disableVC_set) {
+        _disableVC_set = [NSMutableSet new];
+    }
+    return _disableVC_set;
+}
+
 - (void)joinToNavigationController:(UINavigationController *)navigationController {
     
     self.navigationController = navigationController;
@@ -59,9 +70,23 @@
     }
     self.dragPop.progressFinished = _progressFinished;
 }
+-(void)addDisAblePanBackViewController:(Class)class
+{
+    
+    [self.disableVC_set addObject: class];
+    
+    
+}
 
 #pragma mark - UINavigationControllerDelegate
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
+    
+    if ([self.disableVC_set containsObject:[toVC class]]) {
+        self.dragPop.enablePanBack = NO;
+    }else{
+        self.dragPop.enablePanBack = YES;
+    }
+    
     
     if (operation == UINavigationControllerOperationPush) {
         return self.push;

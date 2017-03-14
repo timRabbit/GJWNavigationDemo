@@ -13,4 +13,6 @@
 - (void)gjw_setBackgroundColor:(UIColor *)backgroundColor;
 
 - (void)gjw_reset;
+
+
 @end
