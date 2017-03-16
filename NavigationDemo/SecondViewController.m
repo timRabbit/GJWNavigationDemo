@@ -33,6 +33,11 @@
 }
 -(BOOL)enablePanBack
 {
-    return NO;
+    return YES;
+}
+-(NSDictionary *)navigationTitleAttributes
+{
+    return  @{NSForegroundColorAttributeName: [UIColor blueColor]};
+    
 }
 @end

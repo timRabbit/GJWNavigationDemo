@@ -15,7 +15,7 @@
 - (void)joinToNavigationController:(UINavigationController *)navigationController;
 /** 设置滑动返回的幅度（0~1）默认0.3 */ 
 @property (nonatomic, assign) float progressFinished;
-
+///添加需要屏蔽手势的ViewController
 -(void)addDisAblePanBackViewController:(Class)class;
 
 @end

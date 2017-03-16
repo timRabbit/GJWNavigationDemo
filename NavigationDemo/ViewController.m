@@ -43,6 +43,7 @@
     // 设置navigationBar的背景色 (仅仅在根视图控制器中设置一次即可)
     UINavigationBar *bar = [self.navigationController navigationBar];
     [bar gjw_setBackgroundColor:[self navigationBarInColor]];
+    [bar gjw_setTitleAttributes:[self navigationTitleAttributes]];
     
     self.view.backgroundColor = [UIColor colorWithRed:0.972 green:0.394 blue:0.294 alpha:1.000];
     
@@ -58,5 +59,9 @@
     [self.navigationController pushViewController:second animated:YES];
     
 }
-
+-(NSDictionary *)navigationTitleAttributes
+{
+    return  @{NSForegroundColorAttributeName: [UIColor yellowColor]};
+    
+}
 @end

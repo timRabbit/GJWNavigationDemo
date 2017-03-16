@@ -23,11 +23,19 @@
     UIViewController<GJWNavigationColorSource> *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
     UIColor *nextColor = nil;
+    NSDictionary *nextTitleAttribute = nil;
+    
     if ([fromVC conformsToProtocol:@protocol(GJWNavigationColorSource)]) {
         id <GJWNavigationColorSource> dataSource = fromVC;
         if ([dataSource respondsToSelector:@selector(navigationBarOutColor)]) {
             if ([dataSource navigationBarInColor]) {
                 nextColor = [dataSource navigationBarInColor];
+            }
+        }
+        
+        if ([dataSource respondsToSelector:@selector(navigationTitleAttributes)]) {
+            if ([dataSource navigationTitleAttributes]) {
+                nextTitleAttribute = [dataSource navigationTitleAttributes];
             }
         }
     }
@@ -38,6 +46,13 @@
                 nextColor = [dataSource navigationBarInColor];
             }
         }
+        
+        if ([dataSource respondsToSelector:@selector(navigationTitleAttributes)]) {
+            if ([dataSource navigationTitleAttributes]) {
+                nextTitleAttribute = [dataSource navigationTitleAttributes];
+            }
+        }
+        
     }
     
     UIView *containerView = [transitionContext containerView];
@@ -63,6 +78,7 @@
         shadowView.alpha = 0;
         
         [fromVC.navigationController.navigationBar gjw_setBackgroundColor:nextColor];
+        [fromVC.navigationController.navigationBar gjw_setTitleAttributes:nextTitleAttribute];
         
     } completion:^(BOOL finished) {
 //        fromVC.view.frame = fromF;

@@ -18,6 +18,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // 
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    
+    
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -32,6 +35,10 @@
     return nil;
 }
 
-
+-(NSDictionary *)navigationTitleAttributes
+{
+   return  @{NSForegroundColorAttributeName: [UIColor redColor]};
+    
+}
 
 @end

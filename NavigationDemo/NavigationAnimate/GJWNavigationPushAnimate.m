@@ -23,6 +23,8 @@
     UIViewController<GJWNavigationColorSource> *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
     UIColor *nextColor = nil;
+    NSDictionary *nextTitleAttribute = nil;
+
     if ([fromVC conformsToProtocol:@protocol(GJWNavigationColorSource)]) {
         id <GJWNavigationColorSource> dataSource = fromVC;
         if ([dataSource respondsToSelector:@selector(navigationBarOutColor)]) {
@@ -30,6 +32,13 @@
                 nextColor = [dataSource navigationBarInColor];
             }
         }
+        
+        if ([dataSource respondsToSelector:@selector(navigationTitleAttributes)]) {
+            if ([dataSource navigationTitleAttributes]) {
+                nextTitleAttribute = [dataSource navigationTitleAttributes];
+            }
+        }
+        
     }
     if ([toVC conformsToProtocol:@protocol(GJWNavigationColorSource)]) {
         id<GJWNavigationColorSource> dataSource = toVC;
@@ -38,6 +47,14 @@
                 nextColor = [dataSource navigationBarInColor];
             }
         }
+        
+        if ([dataSource respondsToSelector:@selector(navigationTitleAttributes)]) {
+            if ([dataSource navigationTitleAttributes]) {
+                nextTitleAttribute = [dataSource navigationTitleAttributes];
+            }
+        }
+        
+        
     }
 
     
@@ -68,6 +85,7 @@
         shadowView.alpha = 0.3;
         
         [fromVC.navigationController.navigationBar gjw_setBackgroundColor:nextColor];
+        [fromVC.navigationController.navigationBar gjw_setTitleAttributes:nextTitleAttribute];
         
         
     } completion:^(BOOL finished) {

@@ -49,6 +49,11 @@ static char overlayKey;
     return objc_getAssociatedObject(self, &backViewKey);
 }
 
+- (void)gjw_setTitleAttributes:(NSDictionary *)attributes
+{
+    [self setTitleTextAttributes:attributes];
+}
+
 - (void)gjw_setBackgroundColor:(UIColor *)backgroundColor {
     
     if (self.backView == nil) {

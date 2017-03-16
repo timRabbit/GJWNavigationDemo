@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface UINavigationBar (Color)
-
+///
 - (void)gjw_setBackgroundColor:(UIColor *)backgroundColor;
 
 - (void)gjw_reset;
+
+- (void)gjw_setTitleAttributes:(NSDictionary *)attributes;
 
 
 @end

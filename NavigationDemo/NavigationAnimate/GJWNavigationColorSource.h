@@ -15,12 +15,16 @@
 - (UIColor *)navigationBarInColor;
 - (UIColor *)navigationBarOutColor;
 
+///title 的相关属性
+- (NSDictionary *)navigationTitleAttributes;
+
+
 @end
 
 @protocol GJWNavigationViewControllerPanProtocol <NSObject>
 
 //@optional
-
+///是否使用手势
 - (BOOL)enablePanBack;
 
 @end
