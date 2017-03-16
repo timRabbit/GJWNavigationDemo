@@ -68,6 +68,10 @@ static char overlayKey;
     }
 //    self.translucent = NO;
     self.backView.backgroundColor = backgroundColor;
+    
+    ///保证 title 不会被挡住
+    [self sendSubviewToBack:self.backView];
+    
 }
 
 - (void)gjw_reset {
