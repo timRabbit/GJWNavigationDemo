@@ -16,5 +16,5 @@
 
 - (void)gjw_setTitleAttributes:(NSDictionary *)attributes;
 
-
+-(void)gjw_reset_backView_index;
 @end

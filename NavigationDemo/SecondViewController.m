@@ -24,7 +24,25 @@
      也就是说当导航透明的时候，我们要保证view的(x,y)坐标是从(0,0)位置开始的，而不是以(0.64)开始的
      */
     
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.backgroundColor = [UIColor orangeColor];
+    [button addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventTouchUpInside];
+    [button setTitle:@"下一页" forState:UIControlStateNormal];
+    [self.view addSubview:button];
+    button.frame = CGRectMake(100, 100, 80, 80);
+    
+    
+    
 }
+
+- (void)buttonClick {
+    
+    SecondViewController *second = [SecondViewController new];
+    
+    [self.navigationController pushViewController:second animated:YES];
+    
+}
+
 // 设置从其他页面到该页面的导航颜色
 - (UIColor *)navigationBarInColor {
 //    return [UIColor clearColor];

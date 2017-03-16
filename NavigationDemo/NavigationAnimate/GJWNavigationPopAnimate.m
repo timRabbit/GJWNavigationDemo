@@ -80,6 +80,7 @@
         [fromVC.navigationController.navigationBar gjw_setBackgroundColor:nextColor];
         [fromVC.navigationController.navigationBar gjw_setTitleAttributes:nextTitleAttribute];
         
+        
     } completion:^(BOOL finished) {
 //        fromVC.view.frame = fromF;
         self.animating = NO;
@@ -87,6 +88,7 @@
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
 //        toVC.view.backgroundColor = [UIColor whiteColor];
     }];
+    [toVC.navigationController.navigationBar gjw_reset_backView_index];
     
 }
 

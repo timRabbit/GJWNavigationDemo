@@ -86,6 +86,7 @@
         
         [fromVC.navigationController.navigationBar gjw_setBackgroundColor:nextColor];
         [fromVC.navigationController.navigationBar gjw_setTitleAttributes:nextTitleAttribute];
+
         
         
     } completion:^(BOOL finished) {
@@ -94,7 +95,8 @@
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
 //        toVC.view.backgroundColor = [UIColor whiteColor];
     }];
-
+    [toVC.navigationController.navigationBar gjw_reset_backView_index];
+    
 }
 
 @end

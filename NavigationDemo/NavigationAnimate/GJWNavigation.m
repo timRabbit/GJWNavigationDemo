@@ -10,6 +10,7 @@
 #import "GJWNavigationPushAnimate.h"
 #import "GJWNavigationPopAnimate.h"
 #import "GJWNavigationDragPop.h"
+#import "UINavigationBar+Color.h"
 
 @interface GJWNavigation () <UINavigationControllerDelegate>
 @property (nonatomic, weak) UINavigationController *navigationController;
@@ -112,4 +113,13 @@
     return self.dragPop.interacting ? self.dragPop:nil;
     
 }
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    [self.navigationController.navigationBar gjw_reset_backView_index];
+}
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(nonnull UIViewController *)viewController animated:(BOOL)animated
+{
+    [self.navigationController.navigationBar gjw_reset_backView_index];
+}
+
 @end
