@@ -9,25 +9,132 @@
 #import "UINavigationBar+Color.h"
 #import <objc/runtime.h>
 
-@interface UINavigationBar ()
+@implementation TimUINavigationBarObject
 
-@property (nonatomic, strong) UIView *backView;
+@end
+
+@interface UINavigationBar ()
+{
+
+    
+}
+@property (nonatomic, strong) UIImageView *backView;
+
+@property (nonatomic, strong) TimUINavigationBarObject *preObject;
 
 @end
 
 static char backViewKey;
+static char preObjectKey;
+
 @implementation UINavigationBar (Color)
 static char overlayKey;
-- (UIView *)overlay
-{
-    return objc_getAssociatedObject(self, &overlayKey);
-}
+
 
 - (void)setOverlay:(UIView *)overlay
 {
     objc_setAssociatedObject(self, &overlayKey, overlay, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
+- (UIView *)overlay
+{
+    return objc_getAssociatedObject(self, &overlayKey);
+}
 
+
+- (void)setBackView:(UIImageView *)backView {
+    objc_setAssociatedObject(self, &backViewKey, backView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (UIImageView *)backView {
+    return objc_getAssociatedObject(self, &backViewKey);
+}
+
+-(void)setPreObject:(TimUINavigationBarObject *)preObject
+{
+    objc_setAssociatedObject(self, &preObjectKey, preObject, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+-(TimUINavigationBarObject *)preObject
+{
+    return objc_getAssociatedObject(self, &preObjectKey);
+
+}
+
+#pragma mark init
+-(void)initBackView{
+    [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.shadowImage = [UIImage new];
+    UIImageView *view = [UIImageView new];
+    view.frame = CGRectMake(0, -20, [UIScreen mainScreen].bounds.size.width, 64);
+    [self insertSubview:view atIndex:0];
+    
+    
+        NSArray *subViews = [self subviews];
+        UIView *superView = [subViews firstObject];
+    
+    
+    self.backView = superView;
+    //        [superView addSubview:view];
+    
+    superView.clipsToBounds = YES;
+    
+//    self.backView = view;
+    view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    view.userInteractionEnabled = NO;
+}
+
+#pragma mark setting
+- (void)gjw_setBackgroundColor:(UIColor *)backgroundColor {
+    
+    if (self.backView == nil) {
+        [self initBackView];
+    }
+//    self.translucent = NO;
+    self.backView.backgroundColor = backgroundColor;
+    
+}
+- (void)gjw_setTitleAttributes:(NSDictionary *)attributes
+{
+    [self setTitleTextAttributes:attributes];
+    
+}
+- (void)gjw_setBackgroundImage:(UIImage *)image
+{
+    if (self.backView == nil) {
+        [self initBackView];
+    }
+    //    self.translucent = NO;
+    self.backView.image = image;
+//    self.backView.contentMode = model;
+}
+
+- (void)gjw_reset {
+    [self setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    self.shadowImage = nil;
+    [self.backView removeFromSuperview];
+    self.backView = nil;
+}
+
+-(void)saveBarAttributes:(TimUINavigationBarObject *)object
+{
+    self.preObject = object;
+}
+///滑动取消
+-(void)gjw_reset_afterCancleInteractiveTransition
+{
+    
+    [self gjw_setBackgroundColor:self.preObject.preColor];
+    [self gjw_setBackgroundImage:self.preObject.preBgImage];
+    [self gjw_setTitleAttributes:self.preObject.preTitleAtt];
+    
+}
+-(void)gjw_reset_backView_index
+{
+    [self sendSubviewToBack:self.backView];
+    
+}
+
+
+
+///
 - (void)lt_setBackgroundColor:(UIColor *)backgroundColor
 {
     if (!self.overlay) {
@@ -41,54 +148,4 @@ static char overlayKey;
     }
     self.overlay.backgroundColor = backgroundColor;
 }
-
-- (void)setBackView:(UIView *)backView {
-    objc_setAssociatedObject(self, &backViewKey, backView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-- (UIView *)backView {
-    return objc_getAssociatedObject(self, &backViewKey);
-}
-
-- (void)gjw_setTitleAttributes:(NSDictionary *)attributes
-{
-    [self setTitleTextAttributes:attributes];
-}
-
--(void)gjw_reset_backView_index
-{
-    [self sendSubviewToBack:self.backView];
-    
-}
-- (void)gjw_setBackgroundColor:(UIColor *)backgroundColor {
-    
-    if (self.backView == nil) {
-        [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-        self.shadowImage = [UIImage new];
-        UIView *view = [UIView new];
-        view.frame = CGRectMake(0, -20, [UIScreen mainScreen].bounds.size.width, 64);
-        [self insertSubview:view atIndex:0];
-        
-//        NSArray *subViews = [self subviews];
-//        UIView *superView = [subViews firstObject];
-//        [superView addSubview:view];
-        
-        self.backView = view;
-        view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        view.userInteractionEnabled = NO;
-    }
-//    self.translucent = NO;
-    self.backView.backgroundColor = backgroundColor;
-    
-    ///保证 title 不会被挡住
-//    [self sendSubviewToBack:self.backView];
-    
-}
-
-- (void)gjw_reset {
-    [self setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    self.shadowImage = nil;
-    [self.backView removeFromSuperview];
-    self.backView = nil;
-}
-
 @end

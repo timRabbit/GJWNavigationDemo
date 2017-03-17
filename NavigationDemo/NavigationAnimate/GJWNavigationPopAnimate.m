@@ -23,16 +23,24 @@
     UIViewController<GJWNavigationColorSource> *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
     UIColor *nextColor = nil;
+    UIImage *nextImage = nil;
     NSDictionary *nextTitleAttribute = nil;
     
     if ([fromVC conformsToProtocol:@protocol(GJWNavigationColorSource)]) {
         id <GJWNavigationColorSource> dataSource = fromVC;
+        ///COLOR
         if ([dataSource respondsToSelector:@selector(navigationBarOutColor)]) {
             if ([dataSource navigationBarInColor]) {
                 nextColor = [dataSource navigationBarInColor];
             }
         }
-        
+        //image
+        if ([dataSource respondsToSelector:@selector(navigationBarBgImage)]) {
+            if ([dataSource navigationBarBgImage]) {
+                nextImage = [dataSource navigationBarBgImage];
+            }
+        }
+        //title
         if ([dataSource respondsToSelector:@selector(navigationTitleAttributes)]) {
             if ([dataSource navigationTitleAttributes]) {
                 nextTitleAttribute = [dataSource navigationTitleAttributes];
@@ -41,12 +49,19 @@
     }
     if ([toVC conformsToProtocol:@protocol(GJWNavigationColorSource)]) {
         id<GJWNavigationColorSource> dataSource = toVC;
+        ///color
         if ([dataSource respondsToSelector:@selector(navigationBarOutColor)]) {
             if ([dataSource navigationBarInColor]) {
                 nextColor = [dataSource navigationBarInColor];
             }
         }
-        
+        ///image
+        if ([dataSource respondsToSelector:@selector(navigationBarBgImage)]) {
+            if ([dataSource navigationBarBgImage]) {
+                nextImage = [dataSource navigationBarBgImage];
+            }
+        }
+        //title
         if ([dataSource respondsToSelector:@selector(navigationTitleAttributes)]) {
             if ([dataSource navigationTitleAttributes]) {
                 nextTitleAttribute = [dataSource navigationTitleAttributes];
@@ -79,6 +94,7 @@
         
         [fromVC.navigationController.navigationBar gjw_setBackgroundColor:nextColor];
         [fromVC.navigationController.navigationBar gjw_setTitleAttributes:nextTitleAttribute];
+        [fromVC.navigationController.navigationBar gjw_setBackgroundImage:nextImage ];
         
         
     } completion:^(BOOL finished) {
@@ -87,6 +103,17 @@
         [shadowView removeFromSuperview];
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
 //        toVC.view.backgroundColor = [UIColor whiteColor];
+        
+        if (![transitionContext transitionWasCancelled]) {
+            TimUINavigationBarObject *object = [TimUINavigationBarObject new];
+            object.preColor = nextColor;
+            object.preTitleAtt = nextTitleAttribute;
+            object.preBgImage = nextImage;
+            
+            [fromVC.navigationController.navigationBar saveBarAttributes:object];
+            
+        }
+        
     }];
     [toVC.navigationController.navigationBar gjw_reset_backView_index];
     

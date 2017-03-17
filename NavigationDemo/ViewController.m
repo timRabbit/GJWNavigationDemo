@@ -44,13 +44,17 @@
     UINavigationBar *bar = [self.navigationController navigationBar];
     [bar gjw_setBackgroundColor:[self navigationBarInColor]];
     [bar gjw_setTitleAttributes:[self navigationTitleAttributes]];
+//    [bar gjw_setBackgroundImage:[self navigationBarBgImage]];
     
     self.view.backgroundColor = [UIColor colorWithRed:0.972 green:0.394 blue:0.294 alpha:1.000];
     
 }
 // 设置从其他页面到该页面的导航颜色
 - (UIColor *)navigationBarInColor {
-    return [UIColor colorWithRed:0.972 green:0.394 blue:0.294 alpha:1.000];
+    
+//    return [UIColor colorWithPatternImage:[[UIImage imageNamed:@"bg_profit-"] resizableImageWithCapInsets:UIEdgeInsetsZero]];
+    
+    return [UIColor orangeColor];
 }
 - (void)buttonClick {
     
@@ -64,4 +68,10 @@
     return  @{NSForegroundColorAttributeName: [UIColor yellowColor]};
     
 }
+-(UIImage *)navigationBarBgImage
+{
+    return [UIImage imageNamed:@"bg_profit-"];
+    
+}
+
 @end

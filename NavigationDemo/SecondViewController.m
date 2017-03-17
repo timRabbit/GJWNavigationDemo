@@ -58,4 +58,10 @@
     return  @{NSForegroundColorAttributeName: [UIColor blueColor]};
     
 }
+-(UIImage *)navigationBarBgImage
+{
+    return [UIImage imageNamed:@"bg_expenditure"];
+    
+}
+
 @end

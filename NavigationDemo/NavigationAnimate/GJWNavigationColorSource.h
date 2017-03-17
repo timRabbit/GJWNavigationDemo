@@ -15,6 +15,9 @@
 - (UIColor *)navigationBarInColor;
 - (UIColor *)navigationBarOutColor;
 
+- (UIImage *)navigationBarBgImage;
+
+
 ///title 的相关属性
 - (NSDictionary *)navigationTitleAttributes;
 

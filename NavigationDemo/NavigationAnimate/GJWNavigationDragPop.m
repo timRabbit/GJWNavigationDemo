@@ -9,6 +9,8 @@
 #import "GJWNavigationDragPop.h"
 #import "GJWNavigationPopAnimate.h"
 #import "GJWNavigationColorSource.h"
+#import "UINavigationBar+Color.h"
+
 
 @interface GJWNavigationDragPop ()
 
@@ -97,6 +99,8 @@
                     [self finishInteractiveTransition];
                 } else {
                     [self cancelInteractiveTransition];
+                    [self.navigationController.navigationBar gjw_reset_afterCancleInteractiveTransition];
+
                 }
                 self.interacting = NO;
             }
