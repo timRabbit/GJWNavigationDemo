@@ -34,12 +34,12 @@
                 nextColor = [dataSource navigationBarInColor];
             }
         }
-        ///IMAGE
-        if ([dataSource respondsToSelector:@selector(navigationBarBgImage)]) {
-            if ([dataSource navigationBarBgImage]) {
-                nextImage = [dataSource navigationBarBgImage];
-            }
-        }
+//        ///IMAGE //注释掉,避免后一个页面没有image 的情况的 bug
+//        if ([dataSource respondsToSelector:@selector(navigationBarBgImage)]) {
+//            if ([dataSource navigationBarBgImage]) {
+//                nextImage = [dataSource navigationBarBgImage];
+//            }
+//        }
         ///title
         if ([dataSource respondsToSelector:@selector(navigationTitleAttributes)]) {
             if ([dataSource navigationTitleAttributes]) {

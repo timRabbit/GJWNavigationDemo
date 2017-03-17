@@ -103,6 +103,14 @@ static char overlayKey;
     }
     //    self.translucent = NO;
     self.backView.image = image;
+//    if (image) {
+//        UIColor *color = [UIColor colorWithPatternImage:self.backView.image];
+//        [self gjw_setBackgroundColor:color];
+//        
+//    }
+//    self.backView.image = nil;
+
+    
 //    self.backView.contentMode = model;
 }
 

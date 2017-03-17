@@ -13,6 +13,7 @@
 
 @interface ViewController ()
 @property (nonatomic, strong) GJWNavigation *navigation;
+@property (nonatomic, strong) UIImageView *image;
 @end
 
 @implementation ViewController
@@ -35,6 +36,15 @@
     button.frame = CGRectMake(100, 100, 80, 80);
     
     
+    {
+        UIImageView *button = [UIImageView new];
+        button.backgroundColor = [UIColor orangeColor];
+        [self.view addSubview:button];
+        button.frame = CGRectMake(300, 100, 80, 80);
+        
+        _image = button;
+        
+    }
     self.navigationItem.title = @"Fir Controller";
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc]init];
     backItem.title = @"";
@@ -51,13 +61,44 @@
 }
 // 设置从其他页面到该页面的导航颜色
 - (UIColor *)navigationBarInColor {
-    
-//    return [UIColor colorWithPatternImage:[[UIImage imageNamed:@"bg_profit-"] resizableImageWithCapInsets:UIEdgeInsetsZero]];
+//    UIImage *image = [UIImage imageNamed:@"v2_goback"] ;
+////    UIImage *image = [UIImage imageNamed:@"bg_profit-"] ;
+//    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1) resizingMode:UIImageResizingModeStretch];
+//    return [UIColor colorWithPatternImage:image];
     
     return [UIColor orangeColor];
 }
+static int i = 0;
+
 - (void)buttonClick {
     
+    if(0){
+    UIImage *image1 = [UIImage imageNamed:@"bg_profit-"];
+    UIImage *image2 = [UIImage imageNamed:@"bg_expenditure"];
+    
+    
+    CATransition *transition = [CATransition animation];
+    transition.duration = 1;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionFade;
+    [self.image.layer addAnimation:transition forKey:@"a"];
+    [self.image setImage: ++i % 2 ? image1 : image2];
+    
+    
+    [UIView animateWithDuration:1
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+        
+//                         [self.image setImage: ++i % 2 ? image1 : image2];
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    
+    return;
+    }
     SecondViewController *second = [SecondViewController new];
     
     [self.navigationController pushViewController:second animated:YES];
