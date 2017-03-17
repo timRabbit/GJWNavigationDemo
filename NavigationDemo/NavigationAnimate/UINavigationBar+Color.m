@@ -62,14 +62,17 @@ static char overlayKey;
 -(void)initBackView{
     [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.shadowImage = [UIImage new];
-    UIImageView *view = [UIImageView new];
-    view.frame = CGRectMake(0, -20, [UIScreen mainScreen].bounds.size.width, 64);
-    [self insertSubview:view atIndex:0];
+//    UIImageView *view = [UIImageView new];
+//    view.frame = CGRectMake(0, -20, [UIScreen mainScreen].bounds.size.width, 64);
+//    [self insertSubview:view atIndex:0];
+//    view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+//    view.userInteractionEnabled = NO;
     
     
-        NSArray *subViews = [self subviews];
-        UIView *superView = [subViews firstObject];
-    
+    NSArray *subViews = [self subviews];
+    UIView *superView = [subViews firstObject];
+//    UIView *superView = [subViews objectAtIndex:1];
+//    superView = [[superView subviews]firstObject];
     
     self.backView = superView;
     //        [superView addSubview:view];
@@ -77,8 +80,6 @@ static char overlayKey;
     superView.clipsToBounds = YES;
     
 //    self.backView = view;
-    view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    view.userInteractionEnabled = NO;
 }
 
 #pragma mark setting

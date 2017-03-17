@@ -17,6 +17,7 @@
 
 
 @interface UINavigationBar (Color)
+///使用者可调用
 ///设置 color
 - (void)gjw_setBackgroundColor:(UIColor *)backgroundColor;
 ///设置 image
@@ -24,6 +25,8 @@
 ///设置 title
 - (void)gjw_setTitleAttributes:(NSDictionary *)attributes;
 
+
+///使用者不建议调用
 ///取消自定义的 color 层
 - (void)gjw_reset;
 ///改变 color 层的顺序
