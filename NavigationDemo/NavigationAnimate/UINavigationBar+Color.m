@@ -59,27 +59,45 @@ static char overlayKey;
 }
 
 #pragma mark init
--(void)initBackView{
+-(void)initBackView
+{
     [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.shadowImage = [UIImage new];
-//    UIImageView *view = [UIImageView new];
-//    view.frame = CGRectMake(0, -20, [UIScreen mainScreen].bounds.size.width, 64);
-//    [self insertSubview:view atIndex:0];
-//    view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-//    view.userInteractionEnabled = NO;
+    
+    UIImageView *view = [UIImageView new];
+    view.frame = CGRectMake(0, -20, [UIScreen mainScreen].bounds.size.width, 64);
+    [self insertSubview:view atIndex:0];
+    view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    view.userInteractionEnabled = NO;
+    self.backView = view;
     
     
+//    NSArray *subViews = [self subviews];
+//    UIView *superView = [subViews firstObject];
+//    //    UIView *superView = [subViews objectAtIndex:1];
+//    //    superView = [[superView subviews]firstObject];
+    
+//    self.backView = superView;
+    //        [superView addSubview:view];
+    
+//    superView.clipsToBounds = YES;
+    
+}
+
+-(void)initBackView8_9
+{
+    [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.shadowImage = [UIImage new];
+
     NSArray *subViews = [self subviews];
     UIView *superView = [subViews firstObject];
 //    UIView *superView = [subViews objectAtIndex:1];
 //    superView = [[superView subviews]firstObject];
     
     self.backView = superView;
-    //        [superView addSubview:view];
     
     superView.clipsToBounds = YES;
     
-//    self.backView = view;
 }
 
 #pragma mark setting
@@ -90,7 +108,8 @@ static char overlayKey;
     }
 //    self.translucent = NO;
     self.backView.backgroundColor = backgroundColor;
-    
+    [self gjw_reset_backView_index];
+
 }
 - (void)gjw_setTitleAttributes:(NSDictionary *)attributes
 {

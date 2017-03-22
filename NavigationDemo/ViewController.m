@@ -109,10 +109,10 @@ static int i = 0;
     return  @{NSForegroundColorAttributeName: [UIColor yellowColor]};
     
 }
--(UIImage *)navigationBarBgImage
-{
-    return [UIImage imageNamed:@"bg_profit-"];
-    
-}
+//-(UIImage *)navigationBarBgImage
+//{
+//    return [UIImage imageNamed:@"bg_profit-"];
+//    
+//}
 
 @end

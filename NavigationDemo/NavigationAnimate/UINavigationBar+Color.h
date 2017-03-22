@@ -20,7 +20,7 @@
 ///使用者可调用
 ///设置 color
 - (void)gjw_setBackgroundColor:(UIColor *)backgroundColor;
-///设置 image
+///设置 image,目前2个图片之前的切换没有渐变效果
 - (void)gjw_setBackgroundImage:(UIImage *)image;
 ///设置 title
 - (void)gjw_setTitleAttributes:(NSDictionary *)attributes;
