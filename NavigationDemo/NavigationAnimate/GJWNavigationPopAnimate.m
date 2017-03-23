@@ -24,6 +24,7 @@
     
     UIColor *nextColor = nil;
     UIImage *nextImage = nil;
+    UIImage *shadowImage = nil;
     NSDictionary *nextTitleAttribute = nil;
     
     if ([fromVC conformsToProtocol:@protocol(GJWNavigationColorSource)]) {
@@ -38,6 +39,12 @@
 //        if ([dataSource respondsToSelector:@selector(navigationBarBgImage)]) {
 //            if ([dataSource navigationBarBgImage]) {
 //                nextImage = [dataSource navigationBarBgImage];
+//            }
+//        }
+//        ///IMAGE
+//        if ([dataSource respondsToSelector:@selector(navigationBarShadowImage)]) {
+//            if ([dataSource navigationBarShadowImage]) {
+//                nextImage = [dataSource navigationBarShadowImage];
 //            }
 //        }
         //title
@@ -59,6 +66,12 @@
         if ([dataSource respondsToSelector:@selector(navigationBarBgImage)]) {
             if ([dataSource navigationBarBgImage]) {
                 nextImage = [dataSource navigationBarBgImage];
+            }
+        }
+        ///IMAGE
+        if ([dataSource respondsToSelector:@selector(navigationBarShadowImage)]) {
+            if ([dataSource navigationBarShadowImage]) {
+                shadowImage = [dataSource navigationBarShadowImage];
             }
         }
         //title
@@ -95,6 +108,7 @@
         [fromVC.navigationController.navigationBar gjw_setBackgroundColor:nextColor];
         [fromVC.navigationController.navigationBar gjw_setTitleAttributes:nextTitleAttribute];
         [fromVC.navigationController.navigationBar gjw_setBackgroundImage:nextImage ];
+        [fromVC.navigationController.navigationBar gjw_setShadowImage:shadowImage ];
         
         
     } completion:^(BOOL finished) {
@@ -109,6 +123,7 @@
             object.preColor = nextColor;
             object.preTitleAtt = nextTitleAttribute;
             object.preBgImage = nextImage;
+            object.shadowImage = shadowImage;
             
             [fromVC.navigationController.navigationBar saveBarAttributes:object];
             

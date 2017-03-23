@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		227DA9351E826B2700095209 /* SecondViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 227DA9341E826B2700095209 /* SecondViewController2.m */; };
 		E94C8FC11D235D5F00DF09BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E94C8FC01D235D5F00DF09BB /* main.m */; };
 		E94C8FC41D235D5F00DF09BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E94C8FC31D235D5F00DF09BB /* AppDelegate.m */; };
 		E94C8FC71D235D5F00DF09BB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94C8FC61D235D5F00DF09BB /* ViewController.m */; };
@@ -24,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		227DA9331E826B2700095209 /* SecondViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController2.h; sourceTree = "<group>"; };
+		227DA9341E826B2700095209 /* SecondViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController2.m; sourceTree = "<group>"; };
 		E94C8FBC1D235D5F00DF09BB /* NavigationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NavigationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E94C8FC01D235D5F00DF09BB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E94C8FC21D235D5F00DF09BB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -94,6 +97,8 @@
 				E94C8FC61D235D5F00DF09BB /* ViewController.m */,
 				E94C8FD91D235E0700DF09BB /* SecondViewController.h */,
 				E94C8FDA1D235E0700DF09BB /* SecondViewController.m */,
+				227DA9331E826B2700095209 /* SecondViewController2.h */,
+				227DA9341E826B2700095209 /* SecondViewController2.m */,
 				E94C8FC81D235D5F00DF09BB /* Main.storyboard */,
 				E94C8FCB1D235D5F00DF09BB /* Assets.xcassets */,
 				E94C8FCD1D235D5F00DF09BB /* LaunchScreen.storyboard */,
@@ -203,6 +208,7 @@
 				E94C8FDB1D235E0700DF09BB /* SecondViewController.m in Sources */,
 				E9ED848B1D645A50004B6AD6 /* UINavigationBar+Color.m in Sources */,
 				E9ED84891D645A50004B6AD6 /* GJWNavigationPopAnimate.m in Sources */,
+				227DA9351E826B2700095209 /* SecondViewController2.m in Sources */,
 				E94C8FC71D235D5F00DF09BB /* ViewController.m in Sources */,
 				E9ED84871D645A50004B6AD6 /* GJWNavigation.m in Sources */,
 				E9ED848A1D645A50004B6AD6 /* GJWNavigationPushAnimate.m in Sources */,

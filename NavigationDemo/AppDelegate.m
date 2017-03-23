@@ -20,14 +20,24 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+//    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+//    
+//    
 //    ViewController *viewC = [[ViewController alloc] init];
 //    viewC.view.backgroundColor = [UIColor redColor];
-//    
-//    
 //    BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:viewC];
 //    
 //    
+//    
+//    UITabBarController *tabbar = [[UITabBarController alloc] init];
+//    tabbar.viewControllers = @[nav];
+//    BaseNavigationController *nav2 = [[BaseNavigationController alloc] initWithRootViewController:tabbar];
+//    [nav2 setNavigationBarHidden:1 animated:1];
+//    
 //    self.window.rootViewController = nav;
+//    self.window.rootViewController = nav2;
+//    
+//    [self.window makeKeyAndVisible];
     
     return YES;
 }

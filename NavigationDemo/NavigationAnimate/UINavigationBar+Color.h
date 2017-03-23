@@ -13,6 +13,9 @@
 @property (nonatomic, strong) UIColor *preColor;
 @property (nonatomic, strong) NSDictionary *preTitleAtt;
 @property (nonatomic, strong) UIImage *preBgImage;
+@property (nonatomic, strong) UIImage *shadowImage;
+
+
 @end
 
 
@@ -22,6 +25,8 @@
 - (void)gjw_setBackgroundColor:(UIColor *)backgroundColor;
 ///设置 image,目前2个图片之前的切换没有渐变效果
 - (void)gjw_setBackgroundImage:(UIImage *)image;
+///设置  ShadowImage
+- (void)gjw_setShadowImage:(UIImage *)image;
 ///设置 title
 - (void)gjw_setTitleAttributes:(NSDictionary *)attributes;
 

@@ -54,6 +54,7 @@
     UINavigationBar *bar = [self.navigationController navigationBar];
     [bar gjw_setBackgroundColor:[self navigationBarInColor]];
     [bar gjw_setTitleAttributes:[self navigationTitleAttributes]];
+    [bar gjw_setShadowImage:[self navigationBarShadowImage]];
 //    [bar gjw_setBackgroundImage:[self navigationBarBgImage]];
     
     self.view.backgroundColor = [UIColor colorWithRed:0.972 green:0.394 blue:0.294 alpha:1.000];
@@ -100,13 +101,27 @@ static int i = 0;
     return;
     }
     SecondViewController *second = [SecondViewController new];
+    if (self.tabBarController) {
     
-    [self.navigationController pushViewController:second animated:YES];
+        [self.tabBarController.navigationController pushViewController:second animated:YES];
+        [self.tabBarController.navigationController setNavigationBarHidden:0 animated:1];
     
+    }else{
+        [self.navigationController pushViewController:second animated:YES];
+        
+    }
 }
 -(NSDictionary *)navigationTitleAttributes
 {
     return  @{NSForegroundColorAttributeName: [UIColor yellowColor]};
+    
+}
+-(UIImage *)navigationBarShadowImage
+{
+    
+//    return [UIImage imageNamed:@"bg_expenditure"];
+    return [UIImage new];
+    return nil;
     
 }
 //-(UIImage *)navigationBarBgImage

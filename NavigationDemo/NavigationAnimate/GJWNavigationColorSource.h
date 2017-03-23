@@ -16,6 +16,7 @@
 - (UIColor *)navigationBarOutColor;
 
 - (UIImage *)navigationBarBgImage;
+- (UIImage *)navigationBarShadowImage;
 
 
 ///title 的相关属性

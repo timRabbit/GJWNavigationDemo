@@ -116,6 +116,51 @@ static char overlayKey;
     [self setTitleTextAttributes:attributes];
     
 }
+- (void)gjw_setShadowImage:(UIImage *)image
+{
+//    self.shadowImage = image;
+//    [self gjw_reset_backView_index];
+
+    
+    self.shadowImage = image;
+    
+    NSArray *subViews = [self subviews];
+    
+    UIView *superView = nil;
+    
+    for (UIView *view in subViews ) {
+        NSString *classStr = NSStringFromClass(view.class);
+        if ([classStr isEqualToString:@"_UIBarBackground"]||
+            [classStr isEqualToString:@"_UINavigationBarBackground"])
+            {
+                
+            superView = view;
+            break;
+            
+        }
+        
+    }
+    for (UIView *view in superView.subviews ) {
+        if ([NSStringFromClass(view.class) isEqualToString:@"UIImageView"]){
+            superView = view;
+            
+            if ( image == nil) {
+                superView.hidden = NO;
+                
+            }else{
+                superView.hidden = YES;
+                
+            }
+
+            
+        }
+    }
+    
+  
+    
+    
+}
+
 - (void)gjw_setBackgroundImage:(UIImage *)image
 {
     if (self.backView == nil) {
@@ -145,6 +190,7 @@ static char overlayKey;
 {
     self.preObject = object;
 }
+
 ///滑动取消
 -(void)gjw_reset_afterCancleInteractiveTransition
 {
@@ -152,6 +198,7 @@ static char overlayKey;
     [self gjw_setBackgroundColor:self.preObject.preColor];
     [self gjw_setBackgroundImage:self.preObject.preBgImage];
     [self gjw_setTitleAttributes:self.preObject.preTitleAtt];
+    [self gjw_setShadowImage:self.preObject.shadowImage];
     
 }
 -(void)gjw_reset_backView_index

@@ -6,19 +6,20 @@
 //  Copyright © 2016年 guojunwei. All rights reserved.
 //
 
-#import "SecondViewController.h"
 #import "SecondViewController2.h"
+#import "SecondViewController.h"
 
-@implementation SecondViewController
+@implementation SecondViewController2
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"Second Controller";
+    self.title = @"Second Controller2";
     
-    self.edgesForExtendedLayout = UIRectEdgeAll;
-    
-    /* 
+//    self.edgesForExtendedLayout = UIRectEdgeAll;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
+    /*
      特别注意:
      当该页面的导航颜色为透明色时，要设置 self.edgesForExtendedLayout = UIRectEdgeAll;
      与该页面的相邻的页面的edgesForExtendedLayout != UIRectEdgeNone
@@ -30,15 +31,23 @@
     [button addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"下一页" forState:UIControlStateNormal];
     [self.view addSubview:button];
-    button.frame = CGRectMake(100, 100, 80, 80);
+    button.frame = CGRectMake(100, 568-100-64, 80, 100);
     
+    
+//    self.automaticallyAdjustsScrollViewInsets = true;
+    
+    UIImageView* imageView = [[UIImageView alloc] initWithImage:[ UIImage imageNamed:@"demo-header"]];
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    imageView.frame = CGRectMake(0, -64, self.view.bounds.size.width, self.view.bounds.size.width*0.75);
+    
+    [self.view addSubview:imageView];
     
     
 }
 
 - (void)buttonClick {
     
-    SecondViewController2 *second = [SecondViewController2 new];
+    SecondViewController *second = [SecondViewController new];
     
     [self.navigationController pushViewController:second animated:YES];
     
@@ -52,7 +61,7 @@
 //    image = [image resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeTile];
 //    return [UIColor colorWithPatternImage:image];
 //    
-    return [UIColor whiteColor];
+    return [UIColor clearColor];
 //    return [UIColor colorWithRed:0.972 green:0.394 blue:0.294 alpha:1.000];
     return [UIColor colorWithRed:0.018 green:0.028 blue:0.023 alpha:0.777];
 }
@@ -67,10 +76,10 @@
 }
 -(UIImage *)navigationBarShadowImage
 {
-    
-//    return [UIImage new];
+
+    return [UIImage new];
     return nil;
-    
+
 }
 //-(UIImage *)navigationBarBgImage
 //{
