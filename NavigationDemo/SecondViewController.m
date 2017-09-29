@@ -52,7 +52,7 @@
 //    image = [image resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeTile];
 //    return [UIColor colorWithPatternImage:image];
 //    
-    return [UIColor whiteColor];
+    return [UIColor blackColor];
 //    return [UIColor colorWithRed:0.972 green:0.394 blue:0.294 alpha:1.000];
     return [UIColor colorWithRed:0.018 green:0.028 blue:0.023 alpha:0.777];
 }

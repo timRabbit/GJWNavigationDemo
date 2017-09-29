@@ -13,9 +13,17 @@
 
 @end
 
-@interface UINavigationBar ()
-{
+//@implementation GJW_NavigationBar
+//
+//@end
 
+
+
+
+//@interface UINavigationBar ()
+@interface GJW_NavigationBar ()
+{
+    
     
 }
 @property (nonatomic, strong) UIImageView *backView;
@@ -27,18 +35,8 @@
 static char backViewKey;
 static char preObjectKey;
 
-@implementation UINavigationBar (Color)
-//static char overlayKey;
-//
-//
-//- (void)setOverlay:(UIView *)overlay
-//{
-//    objc_setAssociatedObject(self, &overlayKey, overlay, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-//}
-//- (UIView *)overlay
-//{
-//    return objc_getAssociatedObject(self, &overlayKey);
-//}
+//@implementation UINavigationBar (Color)
+@implementation GJW_NavigationBar
 
 
 - (void)setBackView:(UIImageView *)backView {
@@ -59,6 +57,16 @@ static char preObjectKey;
 }
 
 #pragma mark init
+
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    [self.backView.superview sendSubviewToBack:self.backView];
+    [self insertSubview:self.backView atIndex:0];
+//    [self addSubview:self.backView];
+    
+}
 -(void)initBackView
 {
     [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
@@ -66,14 +74,27 @@ static char preObjectKey;
     
     UIImageView *view = [UIImageView new];
     view.frame = CGRectMake(0, -20, [UIScreen mainScreen].bounds.size.width, 64);
-    [self insertSubview:view atIndex:0];
     view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     view.userInteractionEnabled = NO;
+    
     self.backView = view;
     
-    ///TODO 不应该去掉,但是 ios11 的 bug 需要优先修复
-    self.backView.hidden = 1;
+#ifdef __IPHONE_11_0
+    //    self.backView.hidden = 1;
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 11.0 ) {
+        ///TODO 不应该去掉,但是 ios11 的 bug 需要优先修复
+        view.frame = CGRectMake(0, -44, [UIScreen mainScreen].bounds.size.width, 88);
+        [self insertSubview:view atIndex:0];
+        
+    }else{
+        [self insertSubview:view atIndex:0];
+
+    }
     
+    
+#else
+    
+#endif
     
 //    NSArray *subViews = [self subviews];
 //    UIView *superView = [subViews firstObject];
@@ -87,32 +108,82 @@ static char preObjectKey;
     
 }
 
--(void)initBackView8_9
-{
-    [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.shadowImage = [UIImage new];
-
-    NSArray *subViews = [self subviews];
-    UIView *superView = [subViews firstObject];
-//    UIView *superView = [subViews objectAtIndex:1];
-//    superView = [[superView subviews]firstObject];
-    
-    self.backView = superView;
-    
-    superView.clipsToBounds = YES;
-    
-}
+//-(void)initBackView8_9
+//{
+//    [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+//    self.shadowImage = [UIImage new];
+//
+//    NSArray *subViews = [self subviews];
+//    UIView *superView = [subViews firstObject];
+////    UIView *superView = [subViews objectAtIndex:1];
+////    superView = [[superView subviews]firstObject];
+//
+//    self.backView = superView;
+//
+//    superView.clipsToBounds = YES;
+//
+//}
 
 #pragma mark setting
+-(UIView *)_UIBarBackground
+{
+    
+    NSArray *subViews = [self subviews];
+    UIView *superView = nil;
+    for (UIView *view in subViews ) {
+        NSString *classStr = NSStringFromClass(view.class);
+        if ([classStr isEqualToString:@"_UIBarBackground"])
+        {
+            superView = view;
+            break;
+        }
+    }
+    return superView;
+    
+}
+//-(void)drawRect:(CGRect)rect
+//{
+//    [super drawRect:rect];
+//
+//    UIImage *image = self.backView.image;
+//    if (image==nil) {
+//
+//    }
+//
+//    else{
+//        [image drawInRect:rect];
+//
+//    }
+//
+//
+//}
 - (void)gjw_setBackgroundColor:(UIColor *)backgroundColor {
     
     if (self.backView == nil) {
         [self initBackView];
     }
 //    self.translucent = NO;
-    self.backView.backgroundColor = backgroundColor;
-    [self gjw_reset_backView_index];
+ 
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 11.0 ) {
+#ifdef __IPHONE_11_0
+        ///TODO 不应该去掉,但是 ios11 的 bug 需要优先修复
+//        self.backView.hidden = 1;
+       
+//        [self backView].backgroundColor = backgroundColor;
+//        [self gjw_reset_backView_index];
+        
+        self.backView.backgroundColor = backgroundColor;
+        [self gjw_reset_backView_index];
 
+#else
+#endif
+    
+    }else{
+        
+        self.backView.backgroundColor = backgroundColor;
+        [self gjw_reset_backView_index];
+    }
+    
 }
 - (void)gjw_setTitleAttributes:(NSDictionary *)attributes
 {
@@ -207,25 +278,12 @@ static char preObjectKey;
 }
 -(void)gjw_reset_backView_index
 {
-    [self sendSubviewToBack:self.backView];
-
+    [self.backView.superview sendSubviewToBack:self.backView];
+    
     
 }
 
 
 
-///
-//- (void)lt_setBackgroundColor:(UIColor *)backgroundColor
-//{
-//    if (!self.overlay) {
-//        [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-//
-//        // insert an overlay into the view hierarchy
-//        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, -20, [UIScreen mainScreen].bounds.size.width, self.bounds.size.height + 20)];
-//        self.overlay.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-//
-//        [self insertSubview:self.overlay atIndex:0];
-//    }
-//    self.overlay.backgroundColor = backgroundColor;
-//}
+
 @end

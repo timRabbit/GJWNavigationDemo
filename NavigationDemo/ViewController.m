@@ -51,7 +51,7 @@
     self.navigationItem.backBarButtonItem = backItem;
     
     // 设置navigationBar的背景色 (仅仅在根视图控制器中设置一次即可)
-    UINavigationBar *bar = [self.navigationController navigationBar];
+    GJW_NavigationBar *bar = (GJW_NavigationBar*)[self.navigationController navigationBar];
     [bar gjw_setBackgroundColor:[self navigationBarInColor]];
     [bar gjw_setTitleAttributes:[self navigationTitleAttributes]];
     [bar gjw_setShadowImage:[self navigationBarShadowImage]];

@@ -67,7 +67,7 @@
 }
 -(BOOL)enablePanBack
 {
-    return YES;
+    return NO;
 }
 -(NSDictionary *)navigationTitleAttributes
 {

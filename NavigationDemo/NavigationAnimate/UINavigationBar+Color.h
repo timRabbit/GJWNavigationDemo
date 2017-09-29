@@ -18,8 +18,12 @@
 
 @end
 
+@interface GJW_NavigationBar :UINavigationBar
+//@end
+//
+//@interface UINavigationBar (Color)
+//@interface GJW_NavigationBar (Color)
 
-@interface UINavigationBar (Color)
 ///使用者可调用
 ///设置 color
 - (void)gjw_setBackgroundColor:(UIColor *)backgroundColor;

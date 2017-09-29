@@ -13,7 +13,10 @@
 
 
 @interface GJWNavigationDragPop ()
-
+{
+    UIScreenEdgePanGestureRecognizer * _edgePan;
+    
+}
 @end
 @implementation GJWNavigationDragPop
 
@@ -31,16 +34,28 @@
 //    [_navigationController.view addGestureRecognizer:pan];
     
 //    // 类似于系统从左侧滑动返回
-    UIScreenEdgePanGestureRecognizer *edgePan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    edgePan.edges = UIRectEdgeLeft;
-    [_navigationController.view addGestureRecognizer:edgePan];
+    _edgePan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    _edgePan.edges = UIRectEdgeLeft;
+    [_navigationController.view addGestureRecognizer:_edgePan];
     
 }
 
+-(void)setEnablePanBack:(BOOL)enablePanBack
+{
+    _enablePanBack = enablePanBack;
+    
+    _edgePan.enabled = enablePanBack;
+    
+}
 
 - (void)handlePan:(UIPanGestureRecognizer *)pan {
+    
     if (NO == self.enablePanBack) {
+        self.interacting = NO;
+        [self cancelInteractiveTransition];
+        
         return;
+        
     }
     
     //不支持返回的 code
@@ -99,7 +114,7 @@
                     [self finishInteractiveTransition];
                 } else {
                     [self cancelInteractiveTransition];
-                    [self.navigationController.navigationBar gjw_reset_afterCancleInteractiveTransition];
+                    [(GJW_NavigationBar*)self.navigationController.navigationBar gjw_reset_afterCancleInteractiveTransition];
 
                 }
                 self.interacting = NO;

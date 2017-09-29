@@ -105,10 +105,10 @@
         fromVC.view.frame = CGRectOffset(fromVC.view.frame, fromVC.view.frame.size.width, 0);
         shadowView.alpha = 0;
         
-        [fromVC.navigationController.navigationBar gjw_setBackgroundColor:nextColor];
-        [fromVC.navigationController.navigationBar gjw_setTitleAttributes:nextTitleAttribute];
-        [fromVC.navigationController.navigationBar gjw_setBackgroundImage:nextImage ];
-        [fromVC.navigationController.navigationBar gjw_setShadowImage:shadowImage ];
+        [(GJW_NavigationBar*)fromVC.navigationController.navigationBar gjw_setBackgroundColor:nextColor];
+        [(GJW_NavigationBar*)fromVC.navigationController.navigationBar gjw_setTitleAttributes:nextTitleAttribute];
+        [(GJW_NavigationBar*)fromVC.navigationController.navigationBar gjw_setBackgroundImage:nextImage ];
+        [(GJW_NavigationBar*)fromVC.navigationController.navigationBar gjw_setShadowImage:shadowImage ];
         
         
     } completion:^(BOOL finished) {
@@ -125,12 +125,12 @@
             object.preBgImage = nextImage;
             object.shadowImage = shadowImage;
             
-            [fromVC.navigationController.navigationBar saveBarAttributes:object];
+            [(GJW_NavigationBar*)fromVC.navigationController.navigationBar saveBarAttributes:object];
             
         }
         
     }];
-    [toVC.navigationController.navigationBar gjw_reset_backView_index];
+    [(GJW_NavigationBar*)toVC.navigationController.navigationBar gjw_reset_backView_index];
     
 }
 
