@@ -71,7 +71,7 @@
 }
 -(NSDictionary *)navigationTitleAttributes
 {
-    return  @{NSForegroundColorAttributeName: [UIColor blueColor]};
+    return  @{NSForegroundColorAttributeName: [UIColor yellowColor]};
     
 }
 -(UIImage *)navigationBarShadowImage

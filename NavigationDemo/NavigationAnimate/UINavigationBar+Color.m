@@ -28,17 +28,17 @@ static char backViewKey;
 static char preObjectKey;
 
 @implementation UINavigationBar (Color)
-static char overlayKey;
-
-
-- (void)setOverlay:(UIView *)overlay
-{
-    objc_setAssociatedObject(self, &overlayKey, overlay, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-- (UIView *)overlay
-{
-    return objc_getAssociatedObject(self, &overlayKey);
-}
+//static char overlayKey;
+//
+//
+//- (void)setOverlay:(UIView *)overlay
+//{
+//    objc_setAssociatedObject(self, &overlayKey, overlay, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+//}
+//- (UIView *)overlay
+//{
+//    return objc_getAssociatedObject(self, &overlayKey);
+//}
 
 
 - (void)setBackView:(UIImageView *)backView {
@@ -70,6 +70,9 @@ static char overlayKey;
     view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     view.userInteractionEnabled = NO;
     self.backView = view;
+    
+    ///TODO 不应该去掉,但是 ios11 的 bug 需要优先修复
+    self.backView.hidden = 1;
     
     
 //    NSArray *subViews = [self subviews];
@@ -200,27 +203,29 @@ static char overlayKey;
     [self gjw_setTitleAttributes:self.preObject.preTitleAtt];
     [self gjw_setShadowImage:self.preObject.shadowImage];
     
+
 }
 -(void)gjw_reset_backView_index
 {
     [self sendSubviewToBack:self.backView];
+
     
 }
 
 
 
 ///
-- (void)lt_setBackgroundColor:(UIColor *)backgroundColor
-{
-    if (!self.overlay) {
-        [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-        
-        // insert an overlay into the view hierarchy
-        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, -20, [UIScreen mainScreen].bounds.size.width, self.bounds.size.height + 20)];
-        self.overlay.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        
-        [self insertSubview:self.overlay atIndex:0];
-    }
-    self.overlay.backgroundColor = backgroundColor;
-}
+//- (void)lt_setBackgroundColor:(UIColor *)backgroundColor
+//{
+//    if (!self.overlay) {
+//        [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+//
+//        // insert an overlay into the view hierarchy
+//        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, -20, [UIScreen mainScreen].bounds.size.width, self.bounds.size.height + 20)];
+//        self.overlay.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+//
+//        [self insertSubview:self.overlay atIndex:0];
+//    }
+//    self.overlay.backgroundColor = backgroundColor;
+//}
 @end

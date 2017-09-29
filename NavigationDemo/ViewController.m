@@ -124,10 +124,10 @@ static int i = 0;
     return nil;
     
 }
-//-(UIImage *)navigationBarBgImage
-//{
-//    return [UIImage imageNamed:@"bg_profit-"];
-//    
-//}
+-(UIImage *)navigationBarBgImage
+{
+    return [UIImage imageNamed:@"bg_expenditure"];
+
+}
 
 @end
